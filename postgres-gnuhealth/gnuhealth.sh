@@ -9,7 +9,7 @@ else
 fi
 : ${GNUHEALTH_DB:=health30}
 : ${DB_ENCODING:=UTF-8}
-: ${DB_DUMPFILE:=/demo.sql.gz}
+: ${DB_DUMPFILE:=/gnuhealth-34-demo.sql.gz}
 
 # Perform all actions as user 'postgres'
 export PGUSER=postgres
