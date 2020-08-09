@@ -1,19 +1,22 @@
-db:
-  #build: postgres-gnuhealth
-  image: robdykedotcom/postgres-gnuhealth:3.4
-  volumes:
-    - ./postgresql-data:/var/lib/postgresql/data
-  environment:
-    - POSTGRES_PASSWORD=mysecret
+version: "3.1"
 
-tryton:
-  #build: tryton-server-gnuhealth
-  image: robdykedotcom/tryton-server-gnuhealth:3.4
-  volumes:
-    - ./tryton-data:/var/lib/tryton
-  environment:
-    - TRYTOND_PASSWORD=admin
-  ports:
-    - "8000:8000"
-  links:
-    - db
+services:
+  db:
+    # build: postgres-gnuhealth
+    image: robdykedotcom/postgres-gnuhealth:3.4
+    # volumes:
+    #   - ./data-postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=mysecret
+
+  tryton:
+    # build: tryton-server-gnuhealth
+    image: robdykedotcom/tryton-server-gnuhealth:3.4
+    # volumes:
+    #   - ./data-tryton:/var/lib/tryton
+    environment:
+      - TRYTOND_PASSWORD=jkUbZGvFNeugk
+    ports:
+      - "8000:8000"
+    # links:
+    #   - db

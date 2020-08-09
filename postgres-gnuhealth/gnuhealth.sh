@@ -9,7 +9,7 @@ else
 fi
 : ${GNUHEALTH_DB:=health30}
 : ${DB_ENCODING:=UTF-8}
-: ${DB_DUMPFILE:=/gnuhealth-34-demo.sql.gz}
+: ${DB_DUMPFILE:=/demo.sql.gz}
 
 # Perform all actions as user 'postgres'
 export PGUSER=postgres
@@ -34,7 +34,10 @@ if [ "${INIT}" == "0" ]; then
 	EOSQL
 	echo
 	echo "Importing the gnuhealth database..."
-	{ gosu postgres gunzip -c "$DB_DUMPFILE" | psql -d "$GNUHEALTH_DB"; }
+	# { gosu postgres gunzip -c "$DB_DUMPFILE" | psql -d "$GNUHEALTH_DB"; }
+	if [ -e "$DB_DUMPFILE" ]; then
+		{ gunzip -c "$DB_DUMPFILE" | psql -d "$GNUHEALTH_DB"; }
+	fi
 	echo
 	echo "Allowing access for the gnuhealth user from all IPs..."
 	{ echo; echo "host all $GNUHEALTH_USER 0.0.0.0/0 md5"; } >> "$PGDATA"/pg_hba.conf
